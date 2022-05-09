@@ -1,0 +1,10 @@
+package models
+
+type User struct {
+	Id          int    `json:"-" db:"id"`
+	Name        string `json:"name"`
+	Username    string `json:"username"`
+	Password    string `json:"password"`
+	ServiceType string `json:"service_type"`
+	Info        string `json:"info"`
+}
