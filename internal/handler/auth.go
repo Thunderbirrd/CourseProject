@@ -47,13 +47,3 @@ func (h *Handler) signIn(c *gin.Context) {
 		"token": token,
 	})
 }
-
-func (h *Handler) hello(c *gin.Context) {
-	userId, err := getUserId(c)
-	if err != nil {
-		return
-	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": userId,
-	})
-}

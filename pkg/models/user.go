@@ -1,10 +1,17 @@
 package models
 
 type User struct {
-	Id           int    `json:"-" db:"id"`
-	Name         string `json:"name"`
-	Username     string `json:"username"`
+	Id           int    `json:"id" db:"id"`
+	Name         string `json:"name" db:"name"`
+	Username     string `json:"username" db:"username"`
 	PasswordHash string `json:"password"`
-	ServiceType  string `json:"service_type"`
-	Info         string `json:"info"`
+	ServiceType  string `json:"service_type" db:"service_type"`
+	Info         string `json:"info" db:"info"`
+}
+
+type UpdateUserInput struct {
+	Name        *string `json:"name"`
+	Username    *string `json:"username"`
+	ServiceType *string `json:"service_type"`
+	Info        *string `json:"info"`
 }

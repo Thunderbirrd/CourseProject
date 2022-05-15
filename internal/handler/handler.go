@@ -22,9 +22,16 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		auth.POST("/sign-in", h.signIn)
 	}
 
-	api := router.Group("/api", h.userIdentity)
+	api := router.Group("/api")
 	{
-		api.GET("", h.hello)
+		api.GET("/all", h.getAllUsers)
+		api.GET("/user/:id", h.getUserById)
+		api.GET("/:service", h.getUsersByServiceType)
+	}
+
+	user := router.Group("/user", h.userIdentity)
+	{
+		user.PUT("/update", h.updateUser)
 	}
 	return router
 }
