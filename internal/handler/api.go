@@ -7,6 +7,7 @@ import (
 )
 
 func (h *Handler) getAllUsers(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	users, err := h.services.Api.GetAllUsers()
 
 	if err != nil {
@@ -18,6 +19,7 @@ func (h *Handler) getAllUsers(c *gin.Context) {
 }
 
 func (h *Handler) getUserById(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	userId, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		newErrorResponse(c, http.StatusBadRequest, "invalid user id param")
@@ -34,6 +36,7 @@ func (h *Handler) getUserById(c *gin.Context) {
 }
 
 func (h *Handler) getUsersByServiceType(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	serviceType := c.Param("service")
 
 	users, err := h.services.Api.GetUsersByServiceType(serviceType)
@@ -46,6 +49,7 @@ func (h *Handler) getUsersByServiceType(c *gin.Context) {
 }
 
 func (h *Handler) getUsersByLocation(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	location := c.Param("location")
 
 	users, err := h.services.Api.GetUsersByLocation(location)

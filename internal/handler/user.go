@@ -7,6 +7,7 @@ import (
 )
 
 func (h *Handler) updateUser(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	userId, err := getUserId(c)
 	if err != nil {
 		return

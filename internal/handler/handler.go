@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/Thunderbirrd/CourseProject/internal/service"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -32,7 +33,13 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	user := router.Group("/user", h.userIdentity)
 	{
-		user.PUT("/update", h.updateUser)
+		user.POST("/update", h.updateUser)
 	}
+
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = true
+	config.AllowCredentials = true
+	config.AddAllowHeaders(authorizationHeader)
+	router.Use(cors.New(config))
 	return router
 }

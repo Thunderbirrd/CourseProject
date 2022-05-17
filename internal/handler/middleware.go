@@ -13,6 +13,7 @@ const (
 )
 
 func (h *Handler) userIdentity(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	header := c.GetHeader(authorizationHeader)
 	if header == "" {
 		newErrorResponse(c, http.StatusUnauthorized, "empty auth header")
@@ -35,6 +36,7 @@ func (h *Handler) userIdentity(c *gin.Context) {
 }
 
 func getUserId(c *gin.Context) (int, error) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	id, ok := c.Get(userCtx)
 	if !ok {
 		newErrorResponse(c, http.StatusInternalServerError, "user id not found")

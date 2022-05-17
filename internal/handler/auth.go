@@ -7,6 +7,7 @@ import (
 )
 
 func (h *Handler) signUp(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	var user models.User
 	if err := c.BindJSON(&user); err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
@@ -30,6 +31,7 @@ type signInInput struct {
 }
 
 func (h *Handler) signIn(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	var input signInInput
 
 	if err := c.BindJSON(&input); err != nil {
