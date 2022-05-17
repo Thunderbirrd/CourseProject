@@ -26,7 +26,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		api.GET("/all", h.getAllUsers)
 		api.GET("/user/:id", h.getUserById)
-		api.GET("/:service", h.getUsersByServiceType)
+		api.GET("/by-service/:service", h.getUsersByServiceType)
+		api.GET("/by-location/:location", h.getUsersByLocation)
 	}
 
 	user := router.Group("/user", h.userIdentity)

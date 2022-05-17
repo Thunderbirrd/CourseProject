@@ -45,6 +45,12 @@ func (r *UserPostgres) UpdateUser(id int, input models.UpdateUserInput) error {
 		argId++
 	}
 
+	if input.Location != nil {
+		setValues = append(setValues, fmt.Sprintf("location=$%d", argId))
+		args = append(args, *input.Location)
+		argId++
+	}
+
 	setQuery := strings.Join(setValues, ", ")
 
 	query := fmt.Sprintf("UPDATE %s SET %s WHERE id = $%d",

@@ -24,3 +24,7 @@ func (s *ApiService) GetUserById(id int) (models.User, error) {
 func (s *ApiService) GetUsersByServiceType(serviceType string) ([]models.User, error) {
 	return s.repo.GetUsersByServiceType(serviceType)
 }
+
+func (s *ApiService) GetUsersByLocation(location string) ([]models.User, error) {
+	return s.repo.GetUsersByLocation(location)
+}

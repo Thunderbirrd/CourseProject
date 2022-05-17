@@ -14,6 +14,7 @@ type Api interface {
 	GetAllUsers() ([]models.User, error)
 	GetUserById(id int) (models.User, error)
 	GetUsersByServiceType(serviceType string) ([]models.User, error)
+	GetUsersByLocation(location string) ([]models.User, error)
 }
 
 type User interface {

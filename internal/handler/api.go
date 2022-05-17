@@ -44,3 +44,15 @@ func (h *Handler) getUsersByServiceType(c *gin.Context) {
 
 	c.JSON(http.StatusOK, users)
 }
+
+func (h *Handler) getUsersByLocation(c *gin.Context) {
+	location := c.Param("location")
+
+	users, err := h.services.Api.GetUsersByLocation(location)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, users)
+}

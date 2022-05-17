@@ -17,7 +17,7 @@ func NewApiPostgres(db *sqlx.DB) *ApiPostgres {
 func (r *ApiPostgres) GetAllUsers() ([]models.User, error) {
 	var users []models.User
 
-	query := fmt.Sprintf("SELECT id, name, username, service_type, info FROM %s", usersTable)
+	query := fmt.Sprintf("SELECT id, name, username, service_type, info, location FROM %s", usersTable)
 
 	if err := r.db.Select(&users, query); err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ func (r *ApiPostgres) GetAllUsers() ([]models.User, error) {
 func (r *ApiPostgres) GetUserById(id int) (models.User, error) {
 	var user models.User
 
-	query := fmt.Sprintf("SELECT id, name, username, service_type, info FROM %s WHERE id = $1", usersTable)
+	query := fmt.Sprintf("SELECT id, name, username, service_type, info, location FROM %s WHERE id = $1", usersTable)
 
 	if err := r.db.Get(&user, query, id); err != nil {
 		return user, err
@@ -41,9 +41,21 @@ func (r *ApiPostgres) GetUserById(id int) (models.User, error) {
 func (r *ApiPostgres) GetUsersByServiceType(serviceType string) ([]models.User, error) {
 	var users []models.User
 
-	query := fmt.Sprintf("SELECT id, name, username, service_type, info FROM %s WHERE service_type = $1", usersTable)
+	query := fmt.Sprintf("SELECT id, name, username, service_type, info, location FROM %s WHERE service_type = $1", usersTable)
 
 	if err := r.db.Select(&users, query, serviceType); err != nil {
+		return nil, err
+	}
+
+	return users, nil
+}
+
+func (r *ApiPostgres) GetUsersByLocation(location string) ([]models.User, error) {
+	var users []models.User
+
+	query := fmt.Sprintf("SELECT id, name, username, service_type, info, location FROM %s WHERE location = $1", usersTable)
+
+	if err := r.db.Select(&users, query, location); err != nil {
 		return nil, err
 	}
 
