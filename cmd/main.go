@@ -39,7 +39,7 @@ func main() {
 	srv := new(server.Server)
 
 	go func() {
-		if err := srv.Run(cfg.HttpPort, handlers.InitRoutes()); err != nil {
+		if err := srv.Run(os.Getenv("PORT"), handlers.InitRoutes()); err != nil {
 			logrus.Fatalf("Error occured while running http server: %s", err.Error())
 		}
 	}()
